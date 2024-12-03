@@ -1,10 +1,10 @@
-import React from 'react';
-import { useLoaderData } from 'react-router-dom';
+import React, { useState } from 'react';
 import CoffeeCard from '../CoffeeCard';
 
-const Home = () => {
-    const coffees = useLoaderData();
-    
+
+const Home = ({ loadedCoffees }) => {
+    const [coffees, setCoffees] = useState(loadedCoffees);
+
     return (
         <div className='m-20'>
            <h1 className='text-5xl my-20 text-center'>Hot Hot Cold Coffee: {coffees.length}</h1>
@@ -13,7 +13,10 @@ const Home = () => {
            {
             coffees.map(coffee => <CoffeeCard
             key={coffee._id}
-            coffee={coffee} >
+            coffee={coffee} 
+            coffees={coffees}
+            setCoffees={setCoffees}>
+
             </CoffeeCard>)
            }
            </div>
